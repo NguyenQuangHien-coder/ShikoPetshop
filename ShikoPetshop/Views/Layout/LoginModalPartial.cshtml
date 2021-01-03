@@ -1,0 +1,134 @@
+﻿
+<style>
+    .login-trigger {
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(to bottom right, #333333, #5A5454) !important;
+        padding: 15px 30px;
+        border-radius: 30px;
+        position: relative;
+        top: 50%;
+    }
+
+    /*Modal*/
+    h4 {
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .close {
+        color: #fff;
+        transform: scale(1.2)
+    }
+
+    .modal-content {
+        font-weight: bold;
+        /*background: linear-gradient(to bottom right,#333333,#5A5454) !important;*/
+        background: #333;
+        opacity: 90%;
+        width: 500px;
+        margin: 0 auto;
+    }
+
+    .form-control {
+        margin: 1em 0;
+    }
+
+        .form-control:hover, .form-control:focus {
+            box-shadow: none;
+            border-color: #fff;
+        }
+
+    .username, .password {
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        border-bottom: 2px solid #eee;
+        padding-left: 0;
+        font-weight: normal;
+        background: transparent;
+    }
+
+    .form-control::-webkit-input-placeholder {
+        color: #eee;
+    }
+
+    .form-control:focus::-webkit-input-placeholder {
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .btn_login-wrap {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login {
+        padding: 6px 20px;
+        border-radius: 20px;
+        background: none;
+        border: 2px solid #fa1818;
+        color: #fff;
+        font-weight: bold;
+        transition: all .5s;
+        margin-top: 1em;
+    }
+
+        .login:hover {
+            background: #FA1818;
+            color: #fff;
+        }
+</style>
+
+<div id="login" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-body">
+                <button data-dismiss="modal" class="close">&times;</button>
+                <h4>Đăng Nhập</h4>
+                @using (Html.BeginForm("DangNhap", "Home"))
+                {
+                    <input type="text" name="txtTenDangNhap" class="username form-control" placeholder="Tên đăng nhập" style="color:#fff" required />
+                    <span style="color:red; font-size:10px" id="TB_TaiKhoan"></span>
+                    <input type="password" name="txtMatKhau" class="password form-control" placeholder="Mật khẩu" style="color:#fff" required/>
+                    <span style="color:red; font-size:10px" id="TB_MatKhau"></span>
+                    <div class="btn_login-wrap">
+                        <input class="btn login" type="submit" id="btnDangNhap" value="Đăng Nhập" />
+                    </div>
+                }
+                <span><a href="@Url.Action("DangKy", "Home")">Tạo tài khoản mới</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+@*<script>
+   
+    $("#btnDangNhap").click(function () {
+        var loi = 0;
+       
+        if ($("#TaiKhoan").val() == "") {
+            $("#TB_TaiKhoan").text("Vui lòng điền tên tài khoản");
+            loi++;
+        }
+        else {
+            $("#TB_TaiKhoan").text("");
+        }
+      
+        if ($("#MatKhau").val() == "") {
+            $("#TB_MatKhau").text("Vui lòng nhập mật khẩu");
+            loi++;
+        }
+        else {
+
+            $("#TB_MatKhau").text("");
+        }
+        if (loi != 0) {
+            return false;
+        }
+        else {
+        }
+    });
+</script>*@

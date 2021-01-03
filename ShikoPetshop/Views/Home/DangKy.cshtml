@@ -1,0 +1,167 @@
+﻿@using ShikoPetshop.Models;
+@using CaptchaMvc.HtmlHelpers;
+@using CaptchaMvc;
+@model ThanhVien
+@{
+    ViewBag.Title = "DangKy";
+    Layout = "~/Views/Layout/RegisterLayout.cshtml";
+}
+
+<div class="w3_login">     
+    <h3>Đăng Ký</h3>
+    <div class="w3_login_module">
+        <div class="module form-module">
+            <div class="toggle">
+                <i class="fa fa-times fa-pencil"></i>
+
+            </div>
+            <div class="form">
+                <h2>Tạo tài khoản</h2>
+                @using (Html.BeginForm())
+                {
+
+                    <div>
+                        <span>Tài khoản</span>
+                        @Html.TextBox("TaiKhoan")
+                        <span style="color:red; font-size:10px" id="TB_TaiKhoan"></span>
+                    </div>
+                    <div>
+                        <span>Họ và tên</span>
+                        @Html.TextBox("HoTen")
+                        <span style="color:red; font-size:10px" id="TB_HoTen"></span>
+                    </div>
+                    <div>
+                        <span>Địa chỉ</span>
+                        @Html.TextBox("DiaChi")
+                        <span style="color:red; font-size:10px" id="TB_DiaChi"></span>
+                    </div>
+                    <div>
+                        <span>Số điện thoại</span>
+                        @Html.TextBox("SoDienThoai")
+                        <span style="color:red; font-size:10px" id="TB_SoDienThoai"></span>
+                    </div>
+                    <div>
+                        <span>Email</span>
+                        @Html.TextBox("Email")
+                        <span style="color:red; font-size:10px" id="TB_Email"></span>
+                    </div>
+                    <div>
+                        <span>Mật khẩu</span>
+                        @Html.Password("MatKhau")
+                        <span style="color:red; font-size:10px" id="TB_MatKhau"></span>
+                    </div>
+                    <div>
+                        <span>Nhập lại mật khẩu</span>
+                        @Html.Password("NhapLaiMatKhau")
+                        <span style="color:red; font-size:10px" id="TB_NhapLaiMatKhau"></span>
+                    </div>
+                    <div>
+                        <span>Câu hỏi bí mật</span>
+                        @Html.DropDownList("CauHoi")
+                    </div>
+                    <div>
+                        <span>Câu trả lời</span>
+                        @Html.TextBox("CauTraLoi")
+                        <span style="color:red; font-size:10px" id="TB_CauTraLoi"></span>
+                    </div>
+                    <div>
+                        @Html.Captcha(5)
+                    </div>
+                    <span style="color:red">@ViewBag.ThongBao</span>
+                    <input type="submit" id="btnDangKy" value="Đăng Ký">
+                }
+            </div>
+            <div class="cta"><a data-target="#login" data-toggle="modal" href="#">Quay lại đăng nhập</a></div>
+        </div>
+    </div>
+</div>
+<script>
+    //BẮT LỖI
+    $("#btnDangKy").click(function () {
+        var loi = 0;
+        //Tài khoản
+        if ($("#TaiKhoan").val() == "") {
+            $("#TB_TaiKhoan").text("Vui lòng điền tên tài khoản");
+            loi++;
+        }
+        else {
+            $("#TB_TaiKhoan").text("");
+        }
+        //Tài khoản
+        if ($("#HoTen").val() == "") {
+            $("#TB_HoTen").text("Vui lòng điền họ tên");
+            loi++;
+        }
+        else {
+            $("#TB_HoTen").text("");
+        }
+        //Địa chỉ
+        if ($("#DiaChi").val() == "") {
+            $("#TB_DiaChi").text("Vui lòng điền địa chỉ");
+            loi++;
+        }
+        else {
+
+            $("#TB_DiaChi").text("");
+        }
+        //Số điện thoại
+        if ($("#SoDienThoai").val() == "") {
+            $("#TB_SoDienThoai").text("Vui lòng điền số điện thoại");
+            loi++;
+        }
+        else {
+
+            $("#TB_SoDienThoai").text("");
+        }
+        //Email
+        if ($("#Email").val() == "") {
+            $("#TB_Email").text("Vui lòng điền Email");
+            loi++;
+        }
+        else {
+
+            $("#TB_Email").text("");
+        }
+        //Mật khẩu nhập lại
+        if ($("#NhapLaiMatKhau").val() == "") {
+            $("#TB_NhapLaiMatKhau").text("Vui lòng nhập lại mật khẩu");
+            loi++;
+        }
+        else {
+
+            $("#TB_NhapLaiMatKhau").text("");
+        }
+        //Mật khẩu
+        if ($("#MatKhau").val() == "") {
+            $("#TB_MatKhau").text("Vui lòng nhập mật khẩu");
+            loi++;
+        }
+        else {
+
+            $("#TB_MatKhau").text("");
+        }
+        //Câu trả lời
+        if ($("#CauTraLoi").val() == "") {
+            $("#TB_CauTraLoi").text("Vui lòng điền câu trả lời");
+            loi++;
+        }
+        else {
+
+            $("#TB_CauTraLoi").text("");
+        }
+        dinhdang = /^[0-9A-Za-z]+[0-9A-Za-z_]*@@[\w\d.]+\.\w{2,4}$/;
+        KTemail = dinhdang.test($('#Email').val());
+        if (!KTemail) {
+            $('#TB_Email').text("Email không hợp lệ !");
+            loi++;
+        }
+        if (loi != 0) {
+            return false;           
+        }
+        else {           
+        }
+    });
+</script>
+@*LOGIN MODAL*@
+@Html.Partial("~/Views/Layout/LoginModalPartial.cshtml");
+

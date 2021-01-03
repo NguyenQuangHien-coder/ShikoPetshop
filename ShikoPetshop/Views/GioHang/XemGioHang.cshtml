@@ -1,0 +1,203 @@
+﻿@using ShikoPetshop.Models;
+@model List<ItemGioHang>
+@{
+    ViewBag.Title = "XemGioHang";
+    Layout = "~/Views/Layout/CheckoutLayout.cshtml";
+}
+
+<div class="privacy about">
+    <h3 data-aos="fade-right">Chec<span>kout</span></h3>
+    @if (Model.Count == 0)
+    {       
+    <div class="checkout-right" data-aos="zoom-in">
+        <div class="row">
+            <div class="col-sm-12 col-dm-12 col-lg-12 product--title" data-aos="fade-right">            
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 img--null-cart__wrap" data-aos="zoom-in" style="display:flex; justify-content:center; align-items:center">
+                        <img class="img--null-cart" src="~/Content/images/product--null-cart/1.png" style="width:300px; height:300px">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 null-cart--detail__wrap" data-aos="flip-up">
+                        <div class="null-cart--detail" style="display:flex; flex-direction:column; justify-content:center; align-items:center">
+                            <p style="margin-bottom:10px">Giỏ hàng chưa có sản phẩm nào</p>
+                            <div class="swap-to-home">
+                                <a href="@Url.Action("Index","SanPham")" style="padding:10px 20px; background-color:red; color:whitesmoke; border-radius:2px">Mua Sắm Ngay</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    else
+    {
+        <div class="checkout-right" data-aos="fade-left">
+            @*<h4>Your shopping cart contains: <span>3 Products</span></h4>*@
+            <table class="timetable_sub">
+                <thead>
+                    <tr>
+                        <th>Mã SP</th>
+                        <th>Tên SP</th>
+                        <th style="width:300px">Số Lượng</th>
+                        <th>Hình Ảnh</th>
+                        <th>Đơn Giá</th>
+                        <th>Thành Tiền</th>
+                        <th style="width:70px">Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        using (Html.BeginForm("CapNhatGioHang", "GioHang"))
+                        {
+                    <tr class="rem1">
+                        <td class="invert">@item.MaSP</td>
+                        <td class="invert">@item.TenSP</td>
+                        <td class="invert">
+                            <div class="quantity">
+                                <div class="quantity-select">
+                                    <a href="@Url.Action("TruSP","GioHang", new { @MaSP = item.MaSP, @strURL = Request.Url.ToString()})"><div class="entry value-minus">&nbsp;</div></a>
+                                    <div class="entry value"><span>@item.SoLuong</span></div>
+                                    @*<div class="entry value"><span>@Html.TextBox("SoLuong", item.SoLuong)</span></div>*@                                    
+                                    <a href="@Url.Action("CongSP","GioHang", new { @MaSP = item.MaSP, @strURL = Request.Url.ToString()})"><div class="entry value-plus active">&nbsp;</div></a>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="invert-image"><a href="#"><img src="@Url.Content("~/Content/images/products/" + item.HinhAnh)" width="50" ; height="50" class="img-responsive"></a></td>
+                        <td class="invert">@item.DonGia.ToString("#,##") VNĐ</td>                    
+                        <td class="invert"> @item.ThanhTien.ToString("#,##") VNĐ</td>
+                        <td class="invert">
+                            <div class="rem">                               
+                                <a href="@Url.Action("XoaGioHang","GioHang", new { @MaSP = item.MaSP})"><div class="close1"></div></a>
+                            </div>
+                        </td>
+                        @*<td>@Html.ActionLink("Sửa","SuaGioHang",new { @MaSP = item.MaSP })</td>*@
+                        @*<input type="submit" class="btn btn-danger" value="Cập Nhật" />*@
+
+                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        //HÓA ĐƠN
+        <div class="checkout-left" data-aos="fade-up">
+                <div class="col-md-4 checkout-left-basket">
+                    <h4>Hóa Đơn</h4>
+                    <ul>
+                        @*<li>Product1 <i>-</i> <span>$15.00 </span></li>
+                        <li>Product2 <i>-</i> <span>$25.00 </span></li>
+                        <li>Product3 <i>-</i> <span>$29.00 </span></li>*@
+                        @foreach (var item in Model)
+                        {
+                            <li>@item.TenSP <i>-</i> <span>@item.DonGia.ToString("#,##") </span></li>
+                            <hr />
+                        }
+                        <li>Tổng Tiền <i>-</i> <span>@ViewBag.TongTien.ToString("#,##") VNĐ</span></li>
+                        
+                    </ul>
+                </div>
+                <div class="col-md-8 address_form_agile">
+                    @using (Html.BeginForm("DatHang", "GioHang"))
+                    {
+                        if(Session["TaiKhoan"] == null)
+                        {                      
+                            <h4>Thông tin khách hàng</h4>
+                            @*<form action="payment.html" method="post" class="creditly-card-form agileinfo_form">*@
+                                <section class="creditly-wrapper wthree, w3_agileits_wrapper">
+                                    <div class="information-wrapper">
+                                        <div class="first-row form-group">                                       
+                                            <div>
+                                                <span>Họ tên</span>
+                                                @Html.TextBox("TenKH")
+                                                <span style="color:red; font-size:10px" id="TB_TenKH"></span>                                               
+                                            </div>
+                                            <div>
+                                                <span>Địa chỉ</span>
+                                                @Html.TextBox("DiaChi")
+                                                <span style="color:red; font-size:10px" id="TB_DiaChi"></span>
+                                            </div>
+                                            <div>
+                                                <span>Email</span>
+                                                @Html.TextBox("Email")
+                                                <span style="color:red; font-size:10px" id="TB_Email"></span>                                               
+                                            </div>
+                                            <div>
+                                                <span>Điện Thoại</span>
+                                                @Html.TextBox("SoDienThoai")
+                                                <span style="color:red; font-size:10px" id="TB_SoDienThoai"></span>
+                                            </div>
+                                        </div>                             
+                                    </div>
+                                </section>
+                            @*</form>*@
+                        }
+                        //THANH TOÁN BUTTON
+                        <div class="checkout-right-basket" style="float:left">
+                            <a href="@Url.Action("Index","SanPham")"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>Mua Tiếp </a>
+                        </div>
+                        <div class="checkout-right-basket">
+                            <a href="#"><button id="btnDatHang" type="submit" style="background-color:transparent;outline:none;border:none;">Thanh Toán</button> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                        </div>
+                    }
+                </div>
+                <div class="clearfix"> </div>
+        </div>
+    }
+</div>
+
+<script>
+  
+    $("#btnDatHangkkkk").click(function () {
+        var loi = 0;
+      
+        if ($("#TenKH").val() == "") {
+            $("#TB_TenKH").text("Vui lòng điền tên tài khoản");  
+            loi++;
+        }        
+        else
+        {          
+            $("#TB_TenKH").text("");
+        }
+        
+        if ($("#DiaChi").val() == "") {
+            $("#TB_DiaChi").text("Vui lòng điền địa chỉ");        
+            loi++;
+        }
+        else {
+           
+            $("#TB_DiaChi").text("");
+        }
+      
+        if ($("#Email").val() == "") {
+            $("#TB_Email").text("Vui lòng điền Email");  
+            loi++;
+        }
+        else {
+           
+            $("#TB_Email").text("");
+        }
+       
+        if ($("#SoDienThoai").val() == "") {
+            $("#TB_SoDienThoai").text("Vui lòng điền số điện thoại");   
+            loi++;
+        }
+        else {
+           
+            $("#TB_SoDienThoai").text("");
+        }
+        dinhdang = /^[0-9A-Za-z]+[0-9A-Za-z_]*@@[\w\d.]+\.\w{2,4}$/;
+        KTemail = dinhdang.test($('#Email').val());
+        if (!KTemail) {
+            $('#TB_Email').text("Email không hợp lệ !");
+            loi++;
+        }
+        
+        if (loi != 0)
+        {          
+            return false;
+        }
+    });
+</script>

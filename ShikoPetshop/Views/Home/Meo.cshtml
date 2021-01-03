@@ -1,0 +1,23 @@
+﻿@using ShikoPetshop.Models;
+@{
+    ViewBag.Title = "Mèo";
+    Layout = "~/Views/Layout/HomeLayout.cshtml";
+}
+
+
+@{
+    IEnumerable<SanPham> lstSPMeo = (IEnumerable<SanPham>)ViewBag.ListSPMeo;
+}
+<div class="container" style="margin-bottom:50px">
+    <h3 data-aos="fade-right">Mèo Cưng</h3>
+    <div class="col-12">
+        <div class="row">
+            <div class="agile_top_brands_grids">
+                @Html.Partial("SanPhamPartial", lstSPMeo)
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div> 
+</div>
+
+

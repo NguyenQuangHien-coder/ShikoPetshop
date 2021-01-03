@@ -1,0 +1,95 @@
+﻿@using ShikoPetshop.Models;
+@model IEnumerable<SanPham>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+    //Khởi tạo control WebGrid
+    WebGrid grid = new WebGrid(source: Model, rowsPerPage: 5);
+}
+
+<h2 style="margin-bottom:20px">Tất cả sản phẩm</h2>
+@Html.ActionLink("Thêm sản phẩm", "TaoMoi",null, new { @class= "btn btn-danger" })
+@grid.GetHtml(
+    tableStyle: "divTable",
+    headerStyle: "gridHead",
+    footerStyle: "gridFooter",
+    rowStyle: "gridRow",
+    alternatingRowStyle: "gridAltrow",
+    columns: grid.Columns(
+        grid.Column("MaSP", "Mã sản phẩm"),
+        grid.Column("TenSP","Tên sản phẩm"),
+        grid.Column("HinhAnh","Hình ảnh", format: p => Html.Raw("<img width=\"150\" height=\"150\" src=\"../Content/images/products/" +p.HinhAnh+"\">")),
+        grid.Column(format: p=> Html.ActionLink("Chỉnh sửa","ChinhSua", new { id=p.MaSP})),
+        grid.Column(format: p=> Html.ActionLink("Xóa","Xoa", new { id = p.MaSP}))
+    ))
+<style>
+    .divTable
+    {
+        width:100%;
+        border:1px solid #ffffff !important;
+        margin-top:20px;
+    }
+    .divTable td
+    {
+        border: 1px solid #999999 !important;
+    }
+    .gridHead{
+        background-color:#333;
+        color:whitesmoke !important;
+    }
+    .gridHead > th > a 
+    {
+        color: whitesmoke;
+    }
+    .gridFooter
+    {
+        font-weight: bold;
+    }
+
+    .FooterAdmin 
+    {
+        display: none;
+    }
+    .gridRow {
+        
+        text-align: center;
+    }
+
+    .gridAltrow {
+       
+        text-align: center;
+    }
+    /*NÚT SỬA*/
+    .gridRow td:nth-child(4) a {
+        padding: 10px;
+        background-color: #00ad45;
+        color: whitesmoke;
+        border-radius: 5px;
+        width: 100%;
+    }
+
+    .gridAltrow td:nth-child(4) a {
+        padding: 10px;
+        background-color: #00ad45;
+        color: whitesmoke;
+        border-radius: 5px;
+    }
+
+    /*NÚT XÓA*/
+    .gridRow td:nth-child(5) a {
+        padding: 10px;
+        background-color: #d9534f;
+        color: whitesmoke;
+        border-radius:5px;
+       width:100%;
+    }
+    .gridAltrow td:nth-child(5) a {
+        padding: 10px;
+        background-color: #d9534f;
+        color: whitesmoke;
+        border-radius: 5px;
+    }
+</style>
+
+
+   

@@ -1,0 +1,92 @@
+﻿@using ShikoPetshop.Models;
+@model ItemGioHang
+@{
+    ViewBag.Title = "SuaGioHang";
+    Layout = "~/Views/Layout/CheckoutLayout.cshtml";
+}
+
+@{
+    List<ItemGioHang> lstGioHang = ViewBag.GioHang as List<ItemGioHang>;
+}
+
+<div class="checkout-right">
+    @*<h4>Your shopping cart contains: <span>3 Products</span></h4>*@
+    <table class="timetable_sub">
+        <thead>
+            <tr>
+                <th>Mã SP</th>
+                <th>Tên SP</th>
+                <th style="width:300px">Số Lượng</th>
+                <th>Hình Ảnh</th>
+                <th>Đơn Giá</th>
+                <th>Thành Tiền</th>
+                @*<th>Remove</th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in lstGioHang)
+            {
+                //Sản phẩm có mã sp được chỉnh sửa gửi từ tham số bên trang xem giỏ hàng
+                if (Model.MaSP == item.MaSP)
+                {
+                    using (Html.BeginForm("CapNhatGioHang", "GioHang"))
+                    {
+                            <tr class="rem1">
+                                <td class="invert">@item.MaSP @Html.Hidden("MaSP", item.MaSP)</td>
+                                <td class="invert">@item.TenSP</td>
+                                <td class="invert">
+                                    @*<div class="quantity">
+                                <div class="quantity-select">
+                                    <div class="entry value-minus">&nbsp;</div>
+                                    <div class="entry value"><span>@Html.TextBox("SoLuong", item.SoLuong)</span></div>
+                                    <div class="entry value-plus active">&nbsp;</div>
+                                </div>
+                            </div>*@
+                                    @Html.TextBox("SoLuong", item.SoLuong)
+                                </td>
+                                <td class="invert-image"><a href="#"><img src="@Url.Content("~/Content/images/products/" + item.HinhAnh)" width="50" ; height="50" class="img-responsive"></a></td>
+                                <td class="invert">@item.DonGia.ToString("#,##") VNĐ</td>
+                                <td class="invert"> @item.ThanhTien VNĐ</td>
+                                @*<td class="invert">
+                            <div class="rem">
+                                <div class="close1"> </div>
+                            </div>
+                        </td>*@
+                                <td><input type="submit" value="Cập Nhật" /></td>
+                            </tr>
+                    }
+                }
+                else
+                {
+                        <tr class="rem1">
+                            <td class="invert">@item.MaSP</td>
+                            <td class="invert">@item.TenSP</td>
+                            <td class="invert">
+                                <div class="quantity">
+                                    <div class="quantity-select">
+                                        <div class="entry value-minus">&nbsp;</div>
+                                        <div class="entry value"><span>@item.SoLuong</span></div>
+                                        @*<div class="entry value"><span>@Html.TextBox("SoLuong", item.SoLuong)</span></div>*@
+                                        <div class="entry value-plus active">&nbsp;</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="invert-image"><a href="#"><img src="@Url.Content("~/Content/images/products/" + item.HinhAnh)" width="50" ; height="50" class="img-responsive"></a></td>
+                            <td class="invert">@item.DonGia.ToString("#,##") VNĐ</td>
+                            <td class="invert"> @item.ThanhTien VNĐ</td>
+                            @*<td class="invert">
+                                <div class="rem">
+                                    <div class="close1"> </div>
+                                </div>
+                            </td>*@
+                            <td>@Html.ActionLink("Sửa", "SuaGioHang", new { @MaSP = item.MaSP })</td>
+                            @*<input type="submit" class="btn btn-danger" value="Cập Nhật" />*@
+
+                        </tr>
+                    
+                }
+            }
+        </tbody>
+    </table>
+</div>
+       

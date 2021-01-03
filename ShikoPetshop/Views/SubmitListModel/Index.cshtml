@@ -1,0 +1,22 @@
+﻿@using ShikoPetshop.Models;
+@model PhieuNhap
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <span>Mã phiếu nhập</span>
+    <input name="MaPN" />
+    <span>Mã nhà cung cấp</span>
+    <input name="MaNCC" />
+    for (int i = 1; i < 6; i++)
+    {
+        <h2>Thông Tin Sản Phẩm @i</h2>
+        <input name="@Url.Content("["+i+"].MaSP")" value="@i" /> <br />
+        <input name="@Url.Content("["+i+"].DonGiaNhap")" value="10000" /> <br />
+        <input name="@Url.Content("["+i+"].SoLuongNhap")" value="100" /> <br />
+    }
+    <input type="submit" value="Hoàn tất" />
+}

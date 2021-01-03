@@ -1,0 +1,11 @@
+﻿@*Dùng ViewBag để thể hiện tổng tiền và số lượng SP trong giỏ hàng*@
+<div class="product_list_header" style="margin-top:15px">
+    @*<form action="#" method="post" class="last">
+        <fieldset>
+            <input type="hidden" name="cmd" value="_cart" />
+            <input type="hidden" name="display" value="1" />
+            <input type="submit" name="submit" value="Giỏ Hàng" class="button" />
+        </fieldset>
+    </form>*@
+    <a href="@Url.Action("XemGioHang","GioHang")" style="border:1px solid; color:whitesmoke; padding:5px;" title="@ViewBag.TongTien.ToString("#,##") VNĐ">(@ViewBag.TongSoLuong)<i class="fa fa-shopping-cart" style="padding:2px"></i>Giỏ Hàng</a>
+</div>

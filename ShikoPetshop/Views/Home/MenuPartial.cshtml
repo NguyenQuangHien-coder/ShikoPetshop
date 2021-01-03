@@ -1,0 +1,73 @@
+﻿@using ShikoPetshop.Models;
+@model IEnumerable<SanPham>
+
+<div class="w3l_banner_nav_left" data-aos="flip-down">
+    <nav class="navbar nav_bottom">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header nav_2">
+            <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+            <ul class="nav navbar-nav nav_1">
+                <li class="dropdown mega-dropdown active" style="background-color:#333;">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:#fff">Thú Cưng<span class="caret"></span></a>
+                    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                        <div class="w3ls_vegetables">
+                            <ul>
+                                <li><a href="@Url.Action("Cho", "Home")">Chó</a></li>
+                                <li><a href="@Url.Action("Meo", "Home")">Mèo</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li style="background-color:#333;"><a href="@Url.Action("SPKhac", "Home")" style="color:#fff">Khác...</a></li>
+                <li style="background-color:#333;"><a href="@Url.Action("NuocNgoai", "Home")" style="color:#fff">Nước Ngoài</a></li>
+                <li style="background-color:#333;"><a href="@Url.Action("NoiDia", "Home")" style="color:#fff">Nội Địa</a></li>
+                <li style="background-color:#333;"><a href="@Url.Action("SanPhamMoiVe", "SanPham")" style="color:#fff">Mới Về</a></li>
+                @*<li class="dropdown mega-dropdown active">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Veggies & Fruits<span class="caret"></span></a>
+            <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                <div class="w3ls_vegetables">
+                    <ul>
+                        <li><a href="vegetables.html">Vegetables</a></li>
+                        <li><a href="vegetables.html">Fruits</a></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li><a href="kitchen.html">Kitchen</a></li>
+        <li><a href="short-codes.html">Short Codes</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Beverages<span class="caret"></span></a>
+            <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                <div class="w3ls_vegetables">
+                    <ul>
+                        <li><a href="drinks.html">Soft Drinks</a></li>
+                        <li><a href="drinks.html">Juices</a></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li><a href="pet.html">Pet Food</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Frozen Foods<span class="caret"></span></a>
+            <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                <div class="w3ls_vegetables">
+                    <ul>
+                        <li><a href="frozen.html">Frozen Snacks</a></li>
+                        <li><a href="frozen.html">Frozen Nonveg</a></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+        <li><a href="bread.html">Bread & Bakery</a></li>*@
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</div>

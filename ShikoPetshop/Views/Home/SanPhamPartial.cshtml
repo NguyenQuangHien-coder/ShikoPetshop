@@ -1,0 +1,45 @@
+﻿@using ShikoPetshop.Models;
+@model IEnumerable<SanPham>
+
+@*@foreach (var item in Model)
+    {
+        <td><img src="@Url.Content("~/Content/images/products/"+item.HinhAnh)" /></td>
+        <div>@item.TenSP</div>
+    }*@
+
+@foreach (var item in Model.OrderBy(n => n.DonGia))
+{
+
+    @*@using (Html.BeginForm("SanPhamDetail", "SanPham"))
+    {*@
+            <div class="col-md-3 top_brand_left" style="margin-bottom:20px" data-aos="zoom-in-up">
+                <div class="hover14 column">
+                    <div class="agile_top_brand_left_grid">
+                        @*<div class="tag"><img src="images/tag.png" alt=" " class="img-responsive" /></div>*@
+                        <div class="agile_top_brand_left_grid1">
+                            <figure>
+                                <div class="snipcart-item block">
+                                    <div class="snipcart-thumb">
+                                        <a href="@Url.Action("SanPhamDetail", "SanPham", new { @MaSP = item.MaSP})"><img src="@Url.Content("~/Content/images/products/" + item.HinhAnh)" style="width:200px; height:200px" /></a>
+                                        <p>@item.TenSP</p>
+                                        <h4>@item.DonGia.Value.ToString("#,##") VNĐ</h4>
+                                    </div>                                   
+                                    <div class="snipcart-details top_brand_home_details">
+                                        <a class="addtocard"
+                                           style="color:white; padding:10px 20px; background-color:red; border-radius:2px;"
+                                           href="@Url.Action("ThemGiohang", "GioHang", new { @MaSP = item.MaSP, strURL = Request.Url.ToString() })">THÊM VÀO GIỎ</a>                                       
+                                    </div>
+                                </div>
+                            </figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @*}*@
+    }
+    <style>
+        .addtocard:hover {
+            background-color: green !important;
+            transition: 0.3s !important;
+        }
+    </style>
